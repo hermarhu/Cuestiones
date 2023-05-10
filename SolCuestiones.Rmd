@@ -12,11 +12,72 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Cuestion 1
 ```{r}
+texto <- "Pues sepa Vuestra Merced, ante todas cosas, que a mí llaman Lázaro de Tormes, hijo de Tomé González y de Antona Pérez, naturales de Tejares, aldea de Salamanca. Mi nacimiento fue dentro del río Tormes, por la cual causa tomé el sobrenombre; y fue de esta manera: mi padre, que Dios perdone, tenía cargo de proveer una molienda de una aceña que está ribera de aquel río, en la cual fue molinero más de quince años; y, estando mi madre una noche en la aceña, preñada de mí, tomóle el parto y parióme allí. De manera que con verdad me puedo decir nacido en el río. Pues siendo yo niño de ocho años, achacaron a mi padre ciertas sangrías mal hechas en los costales de los que allí a moler venían, por lo cual fue preso, y confesó y no negó, y padeció persecución por justicia. Espero en Dios que está en la gloria, pues el Evangelio los llama bienaventurados. En este tiempo se hizo cierta armada contra moros, entre los cuales fue mi padre (que a la sazón estaba desterrado por el desastre ya dicho), con cargo de acemilero de un caballero que allá fue. Y con su señor, como leal criado, feneció su vida. Mi viuda madre, como sin marido y sin abrigo se viese, determinó arrimarse a los buenos por ser uno de ellos, y vínose a vivir a la ciudad y alquiló una casilla y metióse a guisar de comer a ciertos estudiantes, y lavaba la ropa a ciertos mozos de caballos del comendador de la Magdalena, de manera que fue frecuentando las caballerizas."
+
+#Pasar el texto a minúsculas.
+text_minus <- tolower(texto)
+
+#Código para contar vocales.
+#Contador de vocales 
+contador <- 0
+
+vocales <- c("a", "e", "i", "o", "u")
+
+#Recorrer cada carácter del texto.
+for (i in 1:nchar(text_minus)) {
+  letra <- substr(text_minus, i, i)
+  if (letra %in% vocales) {
+    contador <- contador + 1
+  }
+}
+
+print(paste("El texto tiene", contador, "vocales."))
+
+
+#Función para contar caracteres que no son vocales.
+countNonVowels <- function(text) {
+  nonVowels <- grep("[^aeiouy]", tolower(text), value = TRUE) #El grep mas el ^ cuenta todos los caracteres menos esos
+  count <- nchar(nonVowels)
+  return(count)
+}
+
+resultado <- countNonVowels(texto)
+cat("Número de caracteres no vocales:", resultado)
+
+#Contador de vocales 'a'.
+contador_a <- 0
+vocal <- "a"
+
+#Función para contar caracteres de la letra 'a'
+for (i in 1:nchar(text_minus)) {
+  letra <- substr(text_minus, i, i)
+  if (letra %in% vocal) {
+    contador_a <- contador_a + 1
+  }
+}
+
+#Función para que me cuente todos los carecteres que se repiten y el numero de caracteres que son
+ocurrencias <- table(strsplit(text_minus, "")[[1]])
+
+# Encontrar los caracteres que se repiten exactamente 131 veces
+char_4 <- names(ocurrencias[ocurrencias == 131])
+
+# Imprimir los caracteres encontrados
+char_4
+
+#Función para que te dice cuantas palabras empiezan por vocal sin acentuar precedidas por uno o mas espacios en blanco.
 
 ```
 
 
 
+# Cuestion 2
+```{r}
+#Se asigna la ruta donde tenemos los daros a una variable
+rm(list=ls())
+ruta <- "./data/Nosotros.tsv"
+read.csv(ruta)
+```
 
 
 
